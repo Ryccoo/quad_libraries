@@ -17,6 +17,10 @@ setValuesRear	KEYWORD2
 setValues 		KEYWORD2
 write 			KEYWORD2
 attach 			KEYWORD2
+getFrontLeft	KEYWORD2
+getFrontRight 	KEYWORD2
+getRearLeft 	KEYWORD2
+getRearRight	KEYWORD2
 
 Rotors			KEYWORD1
 

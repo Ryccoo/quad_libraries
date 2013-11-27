@@ -46,6 +46,18 @@ class Motors {
       Servo.attach(FRONTLEFT,FRONTLEFTMOTOR);
       Servo.attach(FRONTRIGHT,FRONTRIGHTMOTOR);
     }
+    int getFrontLeft() {
+      return frontLeft;
+    }
+    int getFrontRight() {
+      return frontRight;
+    }
+    int getRearLeft() {
+      return rearLeft;
+    }
+    int getRearRight() {
+      return rearRight;
+    }
   private:
     int rearLeft;
     int rearRight;
