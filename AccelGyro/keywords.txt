@@ -12,18 +12,19 @@ AccelGyro	KEYWORD1
 # Methods and Functions (KEYWORD2)
 ################################################
 
-  Calibrate_sensors				KEYWORD2
-  MPU6050_read					KEYWORD2
-  MPU6050_write					KEYWORD2
-  read_gyro_accel_vals			KEYWORD2
-  set_last_read_angle_data		KEYWORD2
-  get_last_time					KEYWORD2
-  get_last_x_angle 				KEYWORD2
-  get_last_y_angle 				KEYWORD2
-  get_last_z_angle   			KEYWORD2
-  get_last_gyro_x_angle  		KEYWORD2
-  get_last_gyro_y_angle  		KEYWORD2
-  get_last_gyro_z_angle   		KEYWORD2
+  Calibrate_sensors				 KEYWORD2
+  MPU6050_read					   KEYWORD2
+  MPU6050_write					   KEYWORD2
+  read_gyro_accel_vals		 KEYWORD2
+  set_last_read_angle_data KEYWORD2
+  get_last_time					   KEYWORD2
+  get_last_x_angle 				 KEYWORD2
+  get_last_y_angle 				 KEYWORD2
+  get_last_z_angle   			 KEYWORD2
+  get_last_gyro_x_angle  	 KEYWORD2
+  get_last_gyro_y_angle  	 KEYWORD2
+  get_last_gyro_z_angle    KEYWORD2
+  Gyro                     KEYWORD1
 
 ################################################
 # Constants and enums (LITERAL1)

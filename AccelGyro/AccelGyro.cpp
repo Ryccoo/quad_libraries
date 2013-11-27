@@ -6,14 +6,14 @@ AccelGyro::AccelGyro() {}
 // --------------------------------------------------------
 // MPU6050_read
 //
-// This is a common function to read multiple bytes 
+// This is a common function to read multiple bytes
 // from an I2C device.
 //
 // It uses the boolean parameter for Wire.endTransMission()
-// to be able to hold or release the I2C-bus. 
+// to be able to hold or release the I2C-bus.
 // This is implemented in Arduino 1.0.1.
 //
-// Only this function is used to read. 
+// Only this function is used to read.
 // There is no function for a single byte.
 //
 int AccelGyro::MPU6050_read(int start, uint8_t *buffer, int size)
@@ -97,7 +97,7 @@ int AccelGyro::MPU6050_write_reg(int reg, uint8_t data)
 }
 int AccelGyro::read_gyro_accel_vals(uint8_t* accel_t_gyro_ptr) {
   // Read the raw values.
-  // Read 14 bytes at once, 
+  // Read 14 bytes at once,
   // containing acceleration, temperature and gyro.
   // With the default settings of the MPU-6050,
   // there is no filter enabled, and the values
@@ -108,8 +108,8 @@ int AccelGyro::read_gyro_accel_vals(uint8_t* accel_t_gyro_ptr) {
   int error = MPU6050_read (MPU6050_ACCEL_XOUT_H, (uint8_t *) accel_t_gyro, sizeof(*accel_t_gyro));
 
   // Swap all high and low bytes.
-  // After this, the registers values are swapped, 
-  // so the structure name like x_accel_l does no 
+  // After this, the registers values are swapped,
+  // so the structure name like x_accel_l does no
   // longer contain the lower byte.
   uint8_t swap;
 #define SWAP(x,y) swap = x; x = y; y = swap
@@ -124,7 +124,7 @@ int AccelGyro::read_gyro_accel_vals(uint8_t* accel_t_gyro_ptr) {
 
   return error;
 }
-// The sensor should be motionless on a horizontal surface 
+// The sensor should be motionless on a horizontal surface
 //  while calibration is happening
 void AccelGyro::Calibrate_sensors() {
   int                   num_readings = 100;
@@ -200,6 +200,8 @@ float AccelGyro::get_last_gyro_y_angle() {
 float AccelGyro::get_last_gyro_z_angle() {
   return accel_t_gyro_global.last_gyro_z_angle;
 }
+
+
 // extern accel_t_gyro_global accel_t_gyro_global;
 // extern accel_t_gyro_union accel_t_gyro;
 // extern AccelGyro Gyro;
