@@ -1,0 +1,25 @@
+################################################
+# Syntax Coloring Map For Motors Library
+################################################
+
+################################################
+# Datatypes (KEYWORD1)
+################################################
+
+Motors	KEYWORD1
+
+################################################
+# Methods and Functions (KEYWORD2)
+################################################
+
+setValuesFront	KEYWORD2
+setValuesRear	KEYWORD2
+setValues 		KEYWORD2
+write 			KEYWORD2
+attach 			KEYWORD2
+
+Rotors			KEYWORD1
+
+################################################
+# Constants and enums (LITERAL1)
+################################################
