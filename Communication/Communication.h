@@ -12,8 +12,9 @@
 #define STOPALLMOTORS     3
 #define SLOWALLMOTORS     5
 
-extern bool connectionActive;
+extern bool connectionActive = true;
 extern long lastConnectionTime;
+extern bool terminal_mode = false;
 
 class Communication {
   public:
@@ -25,38 +26,45 @@ class Communication {
       Serial1.println(text);
     };
 
-    void checkConnection() {
+    void check_connection() {
       Serial1.print("#CON:");
       Serial1.println("Test for reply");
       if (lastConnectionTime - millis() > 3000) {
         Rotors.setValues(1000, 1000, 1000, 1000);
+        connectionActive = false;
       }
       lastConnectionTime = millis();
     }
 
     void receive() {
       if (Serial1.available() > 0 ) {
-        uint8_t input = Serial1.read();
-        if(input == CONNECTIONSTATUS) {
-          connectionActive = true;
-        }
-        if(input == SWITCHPOWER) {
-          wait_for_start();
-        }
-        if(input == ADDTOFRONTMOTORS) {
-          int l = Rotors.getFrontLeft() + 5;
-          int r = Rotors.getFrontRight() + 5;
-          Rotors.setValuesFront(l, r);
-        }
-        if(input == STOPALLMOTORS) {
-          Rotors.setValues(1000, 1000, 1000, 1000);
-        }
-        if(input == SLOWALLMOTORS) {
-          int fl = Rotors.getFrontLeft() - 5;
-          int fr = Rotors.getFrontRight() - 5;
-          int rl = Rotors.getRearLeft() - 5;
-          int rr = Rotors.getRearRight() - 5;
-          Rotors.setValues(fl, fr, rl, rr);
+        //  If terminal mode is turned on
+        if(terminal_mode) {
+          // neco
+        } else  //  terminal mode is off
+        {
+          uint8_t input = Serial1.read();
+          if(input == CONNECTIONSTATUS) {
+            connectionActive = true;
+          }
+          if(input == SWITCHPOWER) {
+            wait_for_start();
+          }
+          if(input == ADDTOFRONTMOTORS) {
+            int l = Rotors.getFrontLeft() + 5;
+            int r = Rotors.getFrontRight() + 5;
+            Rotors.setValuesFront(l, r);
+          }
+          if(input == STOPALLMOTORS) {
+            Rotors.setValues(1000, 1000, 1000, 1000);
+          }
+          if(input == SLOWALLMOTORS) {
+            int fl = Rotors.getFrontLeft() - 5;
+            int fr = Rotors.getFrontRight() - 5;
+            int rl = Rotors.getRearLeft() - 5;
+            int rr = Rotors.getRearRight() - 5;
+            Rotors.setValues(fl, fr, rl, rr);
+          }
         }
       }
     }

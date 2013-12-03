@@ -12,19 +12,19 @@ Motors	KEYWORD1
 # Methods and Functions (KEYWORD2)
 ################################################
 
-setValuesFront	KEYWORD2
-setValuesRear	KEYWORD2
-setValuesLeft	KEYWORD2
-setValuesRight	KEYWORD2
-setValues 		KEYWORD2
-write 			KEYWORD2
-attach 			KEYWORD2
-getFrontLeft	KEYWORD2
-getFrontRight 	KEYWORD2
-getRearLeft 	KEYWORD2
-getRearRight	KEYWORD2
+set_values_front	KEYWORD2
+set_values_Rear		KEYWORD2
+set_Values_Left		KEYWORD2
+set_Values_Right	KEYWORD2
+set_Values 			KEYWORD2
+write 				KEYWORD2
+attach 				KEYWORD2
+get_Front_Left		KEYWORD2
+get_Front_Right 	KEYWORD2
+get_Rear_Left 		KEYWORD2
+get_Rear_Right		KEYWORD2
 
-Rotors			KEYWORD1
+Rotors				KEYWORD1
 
 ################################################
 # Constants and enums (LITERAL1)

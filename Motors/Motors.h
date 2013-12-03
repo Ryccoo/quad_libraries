@@ -22,23 +22,23 @@ class Motors {
       frontLeft = 1000;
       frontRight = 1000;
     }
-    void setValuesFront(int left, int right) {
+    void set_values_front(int left, int right) {
       frontLeft = left;
       frontRight = right;
     }
-    void setValuesRear(int left, int right) {
+    void set_values_rear(int left, int right) {
       rearRight = right;
       rearLeft = left;
     }
-    void setValuesLeft(int left, int right) {
+    void set_values_left(int left, int right) {
       frontLeft = left;
       rearLeft = left;
     }
-    void setValuesRight(int left, int right) {
+    void set_values_right(int left, int right) {
       rearRight = right;
       frontRight = right;
     }
-    void setValues(int fleft, int fright, int rleft, int rright) {
+    void set_values(int fleft, int fright, int rleft, int rright) {
       setValuesFront(fleft, fright);
       setValuesRear(rleft, rright);
     }
@@ -54,16 +54,16 @@ class Motors {
       Servo.attach(FRONTLEFT,FRONTLEFTMOTOR);
       Servo.attach(FRONTRIGHT,FRONTRIGHTMOTOR);
     }
-    int getFrontLeft() {
+    int get_front_left() {
       return frontLeft;
     }
-    int getFrontRight() {
+    int get_front_right() {
       return frontRight;
     }
-    int getRearLeft() {
+    int get_rear_left() {
       return rearLeft;
     }
-    int getRearRight() {
+    int get_rear_right() {
       return rearRight;
     }
   private:
