@@ -30,6 +30,14 @@ class Motors {
       rearRight = right;
       rearLeft = left;
     }
+    void setValuesLeft(int left, int right) {
+      frontLeft = left;
+      rearLeft = left;
+    }
+    void setValuesRight(int left, int right) {
+      rearRight = right;
+      frontRight = right;
+    }
     void setValues(int fleft, int fright, int rleft, int rright) {
       setValuesFront(fleft, fright);
       setValuesRear(rleft, rright);

@@ -14,6 +14,8 @@ Motors	KEYWORD1
 
 setValuesFront	KEYWORD2
 setValuesRear	KEYWORD2
+setValuesLeft	KEYWORD2
+setValuesRight	KEYWORD2
 setValues 		KEYWORD2
 write 			KEYWORD2
 attach 			KEYWORD2

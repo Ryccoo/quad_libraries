@@ -28,7 +28,7 @@ class Communication {
     void checkConnection() {
       Serial1.print("#CON:");
       Serial1.println("Test for reply");
-      if (lastConnectionTime - millis() > 2000) {
+      if (lastConnectionTime - millis() > 3000) {
         Rotors.setValues(1000, 1000, 1000, 1000);
       }
       lastConnectionTime = millis();
