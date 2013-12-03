@@ -6,14 +6,16 @@
 # Datatypes (KEYWORD1)
 ################################################
 
-Communication	KEYWORD1
+Communication				KEYWORD1
+Bluetooth                 	KEYWORD1
 
 ################################################
 # Methods and Functions (KEYWORD2)
 ################################################
 
-  send   			              KEYWORD2
-  check_connection  	        KEYWORD2
+  init						KEYWORD2
+  send   			        KEYWORD2
+  check_connection  	    KEYWORD2
   receive  	                KEYWORD2
   wait_for_start            KEYWORD2
   Bluetooth                 KEYWORD1
