@@ -36,7 +36,7 @@ class TwoWire : public Stream
 		static void (*user_onReceive)(int);
 		static void onRequestService(void);
 		static void onReceiveService(uint8_t*, int);
-		
+
 		uint8_t getRxData(unsigned long cmd);
 		uint8_t sendTxData(unsigned long cmd, uint8_t data);
 		void forceStop(void);
