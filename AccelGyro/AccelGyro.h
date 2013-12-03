@@ -2,6 +2,7 @@
 #define _AccelGyro_h
 
 #include "Energia.h"
+#include "AccelGyro.h"
 #include "../Wire/Wire.h"
 
 
@@ -633,7 +634,7 @@ typedef union accel_t_gyro_union
   } value;
 };
 
-typedef struct accel_t_gyro_global
+typedef struct accel_t_gyro_global_struct
 {
   //  Use the following global variables and access functions
   //  to calibrate the acceleration sensor
@@ -654,18 +655,30 @@ typedef struct accel_t_gyro_global
   float         last_gyro_x_angle;  // Store the gyro angles to compare drift
   float         last_gyro_y_angle;
   float         last_gyro_z_angle;
-};
 
+  // Computed variables
+  float x_angle;
+  float y_angle;
+  float z_angle;
+
+  // X PID VALS
+  double x_power;
+  double x_zero;
+  double x_state;
+};
 
 class AccelGyro {
 public:
   AccelGyro();
-  void Calibrate_sensors();
+  uint8_t init();
+  void calibrate_sensors();
   int MPU6050_read(int start, uint8_t *buffer, int size);
   int MPU6050_write(int start, const uint8_t *pData, int size);
   int MPU6050_write_reg(int reg, uint8_t data);
   int read_gyro_accel_vals(uint8_t* accel_t_gyro_ptr);
   void set_last_read_angle_data(unsigned long time, float x, float y, float z, float x_gyro, float y_gyro, float z_gyro);
+  void calculate();
+  void swap_endians(uint8_t* x, uint8_t* y);
   unsigned long get_last_time();
   float get_last_x_angle();
   float get_last_y_angle();
@@ -675,7 +688,7 @@ public:
   float get_last_gyro_z_angle();
 };
 
-extern accel_t_gyro_global accel_t_gyro_global;
+extern accel_t_gyro_global_struct accel_t_gyro_global;
 extern accel_t_gyro_union accel_t_gyro;
 extern AccelGyro Gyro;
 
