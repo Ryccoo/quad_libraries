@@ -13,16 +13,16 @@ Motors	KEYWORD1
 ################################################
 
 set_values_front	KEYWORD2
-set_values_Rear		KEYWORD2
-set_Values_Left		KEYWORD2
-set_Values_Right	KEYWORD2
-set_Values 			KEYWORD2
+set_values_rear		KEYWORD2
+set_values_left		KEYWORD2
+set_values_right	KEYWORD2
+set_values 			KEYWORD2
 write 				KEYWORD2
 attach 				KEYWORD2
-get_Front_Left		KEYWORD2
-get_Front_Right 	KEYWORD2
-get_Rear_Left 		KEYWORD2
-get_Rear_Right		KEYWORD2
+get_front_left		KEYWORD2
+get_front_right 	KEYWORD2
+get_rear_left 		KEYWORD2
+get_rear_right		KEYWORD2
 
 Rotors				KEYWORD1
 

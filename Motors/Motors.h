@@ -39,14 +39,14 @@ class Motors {
       frontRight = right;
     }
     void set_values(int fleft, int fright, int rleft, int rright) {
-      setValuesFront(fleft, fright);
-      setValuesRear(rleft, rright);
+      set_values_front(fleft, fright);
+      set_values_rear(rleft, rright);
     }
-    void write() {
-      Servo.writeMicroseconds(REARLEFT,1000);
-      Servo.writeMicroseconds(REARRIGHT,1000);
-      Servo.writeMicroseconds(FRONTLEFT,1000);
-      Servo.writeMicroseconds(FRONTRIGHT,1000);
+    void write(int fl, int fr, int rl, int rr) {
+      Servo.writeMicroseconds(REARLEFT,rl);
+      Servo.writeMicroseconds(REARRIGHT,rr);
+      Servo.writeMicroseconds(FRONTLEFT,fl);
+      Servo.writeMicroseconds(FRONTRIGHT,fr);
     }
     void attach() {
       Servo.attach(REARLEFT,REARLEFTMOTOR);
@@ -73,6 +73,6 @@ class Motors {
     int frontRight;
 };
 
-Motors Rotors;
+extern Motors Rotors;
 
 #endif
