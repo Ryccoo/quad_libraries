@@ -6,7 +6,6 @@
  **********************************************************************************************/
 
 #include "Energia.h"
-
 #include <PID_v1.h>
 
 /*Constructor (...)*********************************************************
@@ -25,7 +24,7 @@ PID::PID(double* Input, double* Output, double* Setpoint,
 	PID::SetOutputLimits(0, 255);				//default output limit corresponds to
 												//the arduino pwm limits
 
-    SampleTime = 100;							//default Controller Sample Time is 0.1 seconds
+    SampleTime = 30;							//default Controller Sample Time is 0.1 seconds
 
     PID::SetControllerDirection(ControllerDirection);
     PID::SetTunings(Kp, Ki, Kd);
@@ -40,34 +39,35 @@ PID::PID(double* Input, double* Output, double* Setpoint,
  *   pid Output needs to be computed.  returns true when the output is computed,
  *   false when nothing has been done.
  **********************************************************************************/
-bool PID::Compute()
-{
+ bool PID::Compute()
+ {
    if(!inAuto) return false;
    unsigned long now = millis();
    unsigned long timeChange = (now - lastTime);
    if(timeChange>=SampleTime)
    {
       /*Compute all the working error variables*/
-	  double input = *myInput;
-      double error = *mySetpoint - input;
-      ITerm+= (ki * error);
-      if(ITerm > outMax) ITerm= outMax;
-      else if(ITerm < outMin) ITerm= outMin;
-      double dInput = (input - lastInput);
+    double input = *myInput;
+    double error = *mySetpoint - input;
+    ITerm+= (ki * error);
+    if(ITerm > outMax) ITerm= outMax;
+    else if(ITerm < outMin) ITerm= outMin;
+    double dInput = (input - lastInput);
 
-      /*Compute PID Output*/
-      double output = kp * error + ITerm- kd * dInput;
+    /*Compute PID Output*/
+    double output = kp * error + ITerm- kd * dInput;
 
-	  if(output > outMax) output = outMax;
+    if(output > outMax) output = outMax;
     else if(output < outMin) output = outMin;
-	  *myOutput = output;
+
+    *myOutput = output;
 
       /*Remember some variables for next time*/
-      lastInput = input;
-      lastTime = now;
-	  return true;
-   }
-   else return false;
+    lastInput = input;
+    lastTime = now;
+    return true;
+  }
+  else return false;
 }
 
 

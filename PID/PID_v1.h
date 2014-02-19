@@ -76,5 +76,9 @@ class PID
 	double outMin, outMax;
 	bool inAuto;
 };
+
+extern PID x_pilot;
+extern PID y_pilot;
+
 #endif
 

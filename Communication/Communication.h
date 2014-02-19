@@ -5,6 +5,7 @@
 #include "../AccelGyro/AccelGyro.h"
 #include "../ExternDef.h"
 #include "../Motors/Motors.h"
+#include "../Terminal/Terminal.h"
 
 // Communication constants
 #define CONNECTIONSTATUS  42
@@ -12,7 +13,8 @@
 #define ADDTOFRONTMOTORS  100
 #define STOPALLMOTORS     3
 #define SLOWALLMOTORS     5
-
+#define ADDTOALLMOTORS    7
+#define STARTTERMINALMODE 40
 
 class Communication {
   public:
@@ -20,7 +22,6 @@ class Communication {
 
     void init() {
       Serial1.begin(9600);
-      terminal_mode = false;
       connectionActive = true;
     }
 
@@ -40,33 +41,37 @@ class Communication {
 
     void receive() {
       if (Serial1.available() > 0 ) {
-        //  If terminal mode is turned on
-        if(terminal_mode) {
-          // neco
-        } else  //  terminal mode is off
-        {
-          uint8_t input = Serial1.read();
-          if(input == CONNECTIONSTATUS) {
-            connectionActive = true;
-          }
-          if(input == SWITCHPOWER) {
-            wait_for_start();
-          }
-          if(input == ADDTOFRONTMOTORS) {
-            int l = Rotors.get_front_left() + 5;
-            int r = Rotors.get_front_right() + 5;
-            Rotors.set_values_front(l, r);
-          }
-          if(input == STOPALLMOTORS) {
-            Rotors.set_values(1000, 1000, 1000, 1000);
-          }
-          if(input == SLOWALLMOTORS) {
-            int fl = Rotors.get_front_left() - 5;
-            int fr = Rotors.get_front_right() - 5;
-            int rl = Rotors.get_rear_left() - 5;
-            int rr = Rotors.get_rear_right() - 5;
-            Rotors.set_values(fl, fr, rl, rr);
-          }
+        uint8_t input = Serial1.read();
+        if(input == CONNECTIONSTATUS) {
+          connectionActive = true;
+        }
+        else if(input == SWITCHPOWER) {
+          wait_for_start();
+        }
+        else if(input == ADDTOFRONTMOTORS) {
+          int l = Rotors.get_front_left() + 5;
+          int r = Rotors.get_front_right() + 5;
+          Rotors.set_values_front(l, r);
+        }
+        else if(input == STOPALLMOTORS) {
+          Rotors.set_values(1000, 1000, 1000, 1000);
+        }
+        else if(input == ADDTOALLMOTORS) {
+          int fl = Rotors.get_front_left() + 5;
+          int fr = Rotors.get_front_right() + 5;
+          int rl = Rotors.get_rear_left() + 5;
+          int rr = Rotors.get_rear_right() + 5;
+          Rotors.set_values(fl, fr, rl, rr);
+        }
+        else if(input == SLOWALLMOTORS) {
+          int fl = Rotors.get_front_left() - 5;
+          int fr = Rotors.get_front_right() - 5;
+          int rl = Rotors.get_rear_left() - 5;
+          int rr = Rotors.get_rear_right() - 5;
+          Rotors.set_values(fl, fr, rl, rr);
+        }
+        else if(input == STARTTERMINALMODE) {
+          tty.process_commands();
         }
       }
     }
@@ -74,7 +79,7 @@ class Communication {
     void wait_for_start() {
       uint8_t input;
       while (true) {
-        Serial1.print("\rStandby Mode - Pres B to start");
+        Serial1.println("\rStandby Mode - Pres B to start");
         while (Serial1.available() > 0) {
           input = Serial1.read();
           if (input == SWITCHPOWER ) {
@@ -102,7 +107,6 @@ class Communication {
 private:
   bool connectionActive;
   long lastConnectionTime;
-  bool terminal_mode;
 };
 
 #endif

@@ -638,28 +638,32 @@ typedef struct accel_t_gyro_global_struct
 {
   //  Use the following global variables and access functions
   //  to calibrate the acceleration sensor
-  float    base_x_accel;
-  float    base_y_accel;
-  float    base_z_accel;
+  double    base_x_accel;
+  double    base_y_accel;
+  double    base_z_accel;
 
-  float    base_x_gyro;
-  float    base_y_gyro;
-  float    base_z_gyro;
+  double    base_x_gyro;
+  double    base_y_gyro;
+  double    base_z_gyro;
 
   // Use the following global variables and access functions to help store the overall
   // rotation angle of the sensor
   unsigned long last_read_time;
-  float         last_x_angle;  // These are the filtered angles
-  float         last_y_angle;
-  float         last_z_angle;
-  float         last_gyro_x_angle;  // Store the gyro angles to compare drift
-  float         last_gyro_y_angle;
-  float         last_gyro_z_angle;
+  double         last_x_angle;  // These are the filtered angles
+  double         last_y_angle;
+  double         last_z_angle;
+  double         last_gyro_x_angle;  // Store the gyro angles to compare drift
+  double         last_gyro_y_angle;
+  double         last_gyro_z_angle;
 
   // Computed variables
-  float x_angle;
-  float y_angle;
-  float z_angle;
+  double x_angle;
+  double y_angle;
+  double z_angle;
+
+  // Filtered x_angle
+  uint8_t position = 0;
+  double x_last_five[5];
 
   // X PID VALS
   double x_power;
@@ -686,6 +690,7 @@ public:
   float get_last_gyro_x_angle();
   float get_last_gyro_y_angle();
   float get_last_gyro_z_angle();
+  float get_x();
 };
 
 extern accel_t_gyro_global_struct accel_t_gyro_global;

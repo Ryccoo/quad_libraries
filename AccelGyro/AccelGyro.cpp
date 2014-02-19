@@ -245,11 +245,22 @@ void AccelGyro::calculate() {
     float angle_y = alpha*gyro_angle_y + (1.0 - alpha)*accel_angle_y;
     float angle_z = gyro_angle_z;  //Accelerometer doesn't give z-angle
     // Update the saved data with the latest values
-    set_last_read_angle_data(t_now, angle_x, angle_y, angle_z, unfiltered_gyro_angle_x, unfiltered_gyro_angle_y, unfiltered_gyro_angle_z);
     accel_t_gyro_global.x_angle = angle_x;
     accel_t_gyro_global.y_angle = angle_y;
     accel_t_gyro_global.z_angle = angle_z;
+    accel_t_gyro_global.x_last_five[accel_t_gyro_global.position] = angle_x;
+    accel_t_gyro_global.position = (accel_t_gyro_global.position + 1) % 5;
+    set_last_read_angle_data(t_now, angle_x, angle_y, angle_z, unfiltered_gyro_angle_x, unfiltered_gyro_angle_y, unfiltered_gyro_angle_z);
 }
+
+float AccelGyro::get_x() {
+  int sum = 0;
+  for(int i=0; i<5; i++) {
+    sum += accel_t_gyro_global.x_last_five[i];
+  }
+  return sum / 5.0;
+}
+
 void AccelGyro::swap_endians(uint8_t* x, uint8_t* y) {
   uint8_t swap;
   swap = *x;
